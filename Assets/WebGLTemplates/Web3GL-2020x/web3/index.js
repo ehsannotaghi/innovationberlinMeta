@@ -39,17 +39,18 @@ paste this in inspector to connect to wallet:
 window.web3gl.connect()
 */
 async function connect() {
+  console.log("Connet function called!");
   // uncomment to enable torus and walletconnect
   const providerOptions = {
-    // torus: {
-    //   package: Torus,
-    // },
-    // walletconnect: {
-    //   package: window.WalletConnectProvider.default,
-    //   options: {
-    //     infuraId: "00000000000000000000000000000000",
-    //   },
-    // },
+    torus: {
+      package: Torus,
+    },
+    walletconnect: {
+      package: window.WalletConnectProvider.default,
+      options: {
+        infuraId: "11e61cdfd7aa4d53b333c221cf679640",
+      },
+    },
   };
 
   const web3Modal = new window.Web3Modal.default({
@@ -175,6 +176,8 @@ async function sendTransactionData(to, value, gasPrice, gasLimit, data) {
         });
 }
 
+
+
 /*
 calls a non-mutable contract method.
 const method = "x"
@@ -190,6 +193,14 @@ async function callContract(method, abi, contract, args) {
     ).call()
         .then((result) => window.web3gl.callContractResponse = result)
         .catch((error) => window.web3gl.callContractError = error.message);
+}
+
+async function FetchDataOpensea(){
+  const response = await fetch("https://api.opensea.io/api/v1/assets?format=json&owner=0x95817a76d90623f8a9c5dfb3005f1a7147972966");
+  const data =  await response.json();
+  console.log(data);
+  // window.alert(UTF8ToString(str));
+
 }
 
 /*
